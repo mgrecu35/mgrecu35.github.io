@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>p5.js example</title>
+    <style> body {padding: 0; margin: 0;} </style>
+    <script src="p5.js"></script>
+    <script src="p5.dom.js"></script>
+    <script src="p5.sound.js"></script>
+    <script src="angleT.js"></script>
+    <script src="geometry.js"></script>
+    <script src="jspdf.min.js"></script>
+  </head>
+  <body>
+
+    <div id="myCanvas">
+    </div>
+    <div style="margin:50px">
+    <h3> Statement </h3>
+    <p> The sum of angles of a triangle is 180&#176;.
+    </p>
+    <h3> Hint </h3>
+    <p> &#8737 ACB =  &#8737 CBP (why?); </p>
+    <p> &#8737 CAB =  &#8737 PBP2 (why?); </p>
+    <textarea id="proof" rows="20" cols="80">Your proof?
+    </textarea>
+     <input type="button" value="SaveProof" onclick="go()" />
+    </div>
+  </body>
+  <script language="javascript">
+  function go()
+  {
+  var docPDF = new jsPDF();
+  var c1=document.getElementById('proof').value;
+  docPDF.text(c1,10,10);
+  docPDF.save('anglesT.pdf')
+  }
+  </script>
+</html>
