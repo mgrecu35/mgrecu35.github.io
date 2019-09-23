@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heights in isosceles triangle</title>
+    <style> body {padding: 0; margin: 0;} </style>
+    <script src="p5.js"></script>
+    <script src="p5.dom.js"></script>
+    <script src="p5.sound.js"></script>
+    <script src="heightsIsos.js"></script>
+    <script src="geometry.js"></script>
+    <script src="/home/grecu/node_modules/jspdf/dist/jspdf.min.js"></script>
+  </head>
+  <body>
+
+    <div id="myCanvas">
+    </div>
+    <div style="margin:50px">
+    <h3> Statement </h3>
+    <p> In a isosceles triangle (AB=AC), the altitudes opposite
+      to the equal sides
+      are congruent (BN=CP).
+    </p>
+
+    <div id="myHint" style="display: none;">
+      <h3> Hint </h3>
+      &#9651 ACP =  &#9651 ABN (why?);
+      <br>
+      </br>
+    </div>
+
+    <div id="myButton">
+      <input type="button" value="getHint" onclick="hint()" />
+    </div>
+
+
+    <div id="myProof">
+    <!--<p> &#9651 ACP =  &#9651 ABN (why?); </p> -->
+    <textarea id="proof" rows="20" cols="70">Your proof?
+    </textarea>
+     <input type="button" value="SaveProof" onclick="go()" />
+    </div>
+
+  </body>
+  <script language="javascript">
+    var ihint=0;
+    function hint()
+    {
+    var x = document.getElementById("myHint");
+    var x2 = document.getElementById("myButton");
+    ihint=ihint+1;
+    if(ihint>1)
+    {
+    alert('no more hints!');
+    }
+    else
+    {
+    x.style.display = "block";
+    x2.style.display = "none";
+    }
+    //
+    }
+    function go()
+    {
+    var docPDF = new jsPDF();
+    var text=document.getElementById('proof').value;
+    var splitText = docPDF.splitTextToSize(text, 250);
+    var pageHeight = docPDF.internal.pageSize.height;
+    docPDF.setFontSize(11);
+    var y = 20;
+    for (var i=0; i<splitText.length; i++){
+        if (y > 275){
+            y = 20;
+            docPDF.addPage();
+        }
+        docPDF.text(20, y, splitText[i]);
+        y = y + 5;
+    }
+    docPDF.save('heightsIsos.pdf')
+    }
+  </script>
+</html>
