@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Example GeoGebra applet embedding</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<script src="navigation2.js"></script>
+</head>
+
+<body>
+<div>
+<h1>Example GeoGebra applet embedding</h1>
+<p>This is an example of an HTML file containing a GeoGebra applet.
+  The geometrical construction is done directly from Javascript.
+  The Javascript script defines 3 points in Geogebra script and draws
+  a triangle.  The perpendiculars to the three sides of the triangle
+are also determined and drawn. </p>
+
+<script type="text/javascript" src="GeoGebra/scripts/deployggb.js"></script>
+<script src="https://www.geogebra.org/apps/deployggb.js"></script>
+<script type="text/javascript">
+
+
+    var ggbApplet = new GGBApplet({appName:"geometry","showtoolbar":true,"showAlgebraInput": true, }, true);
+   //
+    //  when used with Math Apps Bundle, uncomment this:
+  //  ggbApplet.setHTML5Codebase('GeoGebra/HTML5/5.0/web/');
+
+
+    window.onload = function() {
+
+    ggbApplet.inject('applet_container2');
+   }
+</script>
+
+
+<div style="width:707px;height:415px;display:block" id="applet_container2"></div>
+
+<p>
+
+    That is all!
+</div>
+<input type="button" value="getH" onclick="go()" />
+<script language="javascript">
+  function go()
+  {
+  ggbApplet.evalCommand("A=(0.36,3.26)");
+  ggbApplet.evalCommand("B=(-3.36,-2.26)");
+  ggbApplet.evalCommand("C=(3.36,-1.26)");
+  ggbApplet.evalCommand("ZoomIn(-5,-5,5,5)");
+  ggbApplet.evalCommand("t1 = Polygon(A, B, C)");
+  ggbApplet.evalCommand("a = Segment(B, C)");
+  ggbApplet.evalCommand("b = Segment(C, A)");
+  ggbApplet.evalCommand("c = Segment(A, B)");
+  ggbApplet.evalCommand("f=PerpendicularLine(A, a)");
+  ggbApplet.evalCommand("g=PerpendicularLine(B, b)");
+  ggbApplet.evalCommand("h=PerpendicularLine(C, c)");
+  ggbApplet.evalCommand("H=Intersect(f, g)");
+
+  }
+  </script>
+
+</body>
+
+</html>
