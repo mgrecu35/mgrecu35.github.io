@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title><h2>Example GeoGebra applet embedding</h2></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<script src="navigation2.js"></script>
+  <script type="text/javascript" src="GeoGebra/scripts/deployggb.js"></script>
+  <script src="https://www.geogebra.org/apps/deployggb.js"></script>
+  <script type="text/javascript">
+
+
+      var ggbApplet = new GGBApplet({appName:"geometry","showtoolbar":true,"showAlgebraInput": true, }, true);
+     //
+      //  when used with Math Apps Bundle, uncomment this:
+    //  ggbApplet.setHTML5Codebase('GeoGebra/HTML5/5.0/web/');
+
+    var once=0;
+      window.onload = function() {
+      ggbApplet.inject('applet_container2');
+     }
+  </script>
+
+</head>
+
+<body>
+<div>
+<h2>Example of GeoGebra applet embedding</h2>
+<p>This is an example of GeoGebra applet embedded in HTML. No instructions are initially loaded by the applet.
+  When button drawCurves is pressed a sequence of Geogebra commands are passed to the applet.
+</p>
+
+
+
+
+<div style="width:710px;height:525px;display:block" id="applet_container2"></div>
+
+<p>
+
+</div>
+<script language="javascript">
+  function go()
+  {
+    if(once==1)
+    return;
+  ggbApplet.evalCommand("n=3");
+  ggbApplet.evalCommand("t1=0");
+  ggbApplet.evalCommand("t2=30");
+  ggbApplet.evalCommand("t3=30");
+  ggbApplet.evalCommand("t4=90");
+  ggbApplet.evalCommand("Curve((2+2*sin(t);t),t,0,2*pi)");
+  ggbApplet.evalCommand("Curve((4-2*sin(t);t),t,0,2*pi)");
+  ggbApplet.evalCommand("ZoomIn(0.75)");
+  ggbApplet.setGridVisible(true);
+  ggbApplet.evalCommand("x1=Sequence((2+2*sin(t))*cos(t),t,t1/180.0*pi,t2/180.0*pi,pi/(18*n1))");
+  ggbApplet.evalCommand("y1=Sequence((2+2*sin(t))*sin(t),t,t1/180.0*pi,t2/180.0*pi,pi/(18*n1))");
+  ggbApplet.evalCommand("l1=Sequence(Segment((0,0),(Element(x1,k),Element(y1,k))),k,1,Length(x1))");
+  ggbApplet.evalCommand("x2=Sequence((4-2*sin(t))*cos(t),t,(t3)/180.0*pi,t4/180.0*pi,pi/(18*n1))");
+  ggbApplet.evalCommand("y2=Sequence((4-2*sin(t))*sin(t),t,(t3)/180.0*pi,t4/180.0*pi,pi/(18*n1))");
+  ggbApplet.evalCommand("l2=Sequence(Segment((0,0),(Element(x2,k),Element(y2,k))),k,1,Length(x2))");
+  ggbApplet.setColor("l2", 255,0,0);
+  once+=1;
+  }
+  </script>
+<input type="button" value="drawCurves" onclick="go()">
+
+
+</body>
+
+</html>
